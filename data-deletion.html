@@ -1,0 +1,626 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Delete Your Account — Gyanavia</title>
+  <link href="https://fonts.googleapis.com/css2?family=Sora:wght@300;400;500;600;700&family=DM+Serif+Display:ital@0;1&display=swap" rel="stylesheet" />
+  <style>
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+    :root {
+      --coral:   #FF8970;
+      --amber:   #FFC66D;
+      --sky:     #87C8E8;
+      --blue:    #6FA8DC;
+      --dark:    #1C1C2E;
+      --mid:     #3D3D55;
+      --muted:   #8888AA;
+      --white:   #FFFFFF;
+      --surface: #F7F7FB;
+      --border:  #E8E8F0;
+      --red:     #FF4757;
+      --green:   #2ED573;
+    }
+
+    html { scroll-behavior: smooth; }
+
+    body {
+      font-family: 'Sora', sans-serif;
+      background: var(--surface);
+      color: var(--dark);
+      min-height: 100vh;
+      overflow-x: hidden;
+    }
+
+    /* ── Hero ── */
+    .hero {
+      background: linear-gradient(135deg, var(--coral) 0%, var(--amber) 38%, var(--sky) 68%, var(--blue) 100%);
+      padding: 64px 24px 80px;
+      text-align: center;
+      position: relative;
+      overflow: hidden;
+    }
+
+    .hero::before {
+      content: '';
+      position: absolute;
+      inset: 0;
+      background: radial-gradient(ellipse at 30% 0%, rgba(255,255,255,0.18) 0%, transparent 60%),
+                  radial-gradient(ellipse at 80% 100%, rgba(0,0,0,0.08) 0%, transparent 50%);
+    }
+
+    .hero-inner { position: relative; max-width: 640px; margin: 0 auto; }
+
+    .logo {
+      display: inline-flex;
+      align-items: center;
+      gap: 10px;
+      background: rgba(255,255,255,0.22);
+      border: 1.5px solid rgba(255,255,255,0.4);
+      border-radius: 40px;
+      padding: 8px 20px 8px 10px;
+      margin-bottom: 36px;
+      backdrop-filter: blur(8px);
+    }
+
+    .logo-icon {
+      width: 34px; height: 34px;
+      background: white;
+      border-radius: 50%;
+      display: flex; align-items: center; justify-content: center;
+      font-size: 18px;
+    }
+
+    .logo-text {
+      font-size: 15px;
+      font-weight: 600;
+      color: white;
+      letter-spacing: 0.02em;
+    }
+
+    .hero h1 {
+      font-family: 'DM Serif Display', serif;
+      font-size: clamp(32px, 6vw, 52px);
+      color: white;
+      line-height: 1.15;
+      margin-bottom: 16px;
+      text-shadow: 0 2px 20px rgba(0,0,0,0.15);
+    }
+
+    .hero p {
+      font-size: 16px;
+      color: rgba(255,255,255,0.88);
+      line-height: 1.65;
+      max-width: 480px;
+      margin: 0 auto;
+    }
+
+    /* ── Layout ── */
+    .container {
+      max-width: 720px;
+      margin: 0 auto;
+      padding: 0 20px 80px;
+    }
+
+    /* ── Cards ── */
+    .card {
+      background: white;
+      border-radius: 20px;
+      border: 1.5px solid var(--border);
+      padding: 32px;
+      margin-top: 28px;
+      box-shadow: 0 4px 24px rgba(28,28,46,0.06);
+    }
+
+    .card-header {
+      display: flex;
+      align-items: center;
+      gap: 14px;
+      margin-bottom: 24px;
+    }
+
+    .card-icon {
+      width: 44px; height: 44px;
+      border-radius: 12px;
+      display: flex; align-items: center; justify-content: center;
+      font-size: 20px;
+      flex-shrink: 0;
+    }
+
+    .card-icon.orange { background: linear-gradient(135deg, #FFE0D6, #FFCDB8); }
+    .card-icon.blue   { background: linear-gradient(135deg, #D6EEFF, #B8DCFF); }
+    .card-icon.green  { background: linear-gradient(135deg, #D6FFE8, #B8FFD0); }
+    .card-icon.red    { background: linear-gradient(135deg, #FFD6D6, #FFB8B8); }
+    .card-icon.purple { background: linear-gradient(135deg, #E8D6FF, #D4B8FF); }
+
+    .card h2 {
+      font-size: 18px;
+      font-weight: 600;
+      color: var(--dark);
+    }
+
+    .card h2 span {
+      display: block;
+      font-size: 12px;
+      font-weight: 400;
+      color: var(--muted);
+      margin-top: 2px;
+      letter-spacing: 0.04em;
+      text-transform: uppercase;
+    }
+
+    /* ── Steps ── */
+    .steps { display: flex; flex-direction: column; gap: 16px; }
+
+    .step {
+      display: flex;
+      gap: 16px;
+      align-items: flex-start;
+    }
+
+    .step-num {
+      width: 32px; height: 32px;
+      border-radius: 50%;
+      background: linear-gradient(135deg, var(--coral), var(--amber));
+      color: white;
+      font-size: 13px;
+      font-weight: 700;
+      display: flex; align-items: center; justify-content: center;
+      flex-shrink: 0;
+      margin-top: 1px;
+    }
+
+    .step-body { flex: 1; }
+
+    .step-body strong {
+      display: block;
+      font-size: 14px;
+      font-weight: 600;
+      color: var(--dark);
+      margin-bottom: 3px;
+    }
+
+    .step-body p {
+      font-size: 13px;
+      color: var(--muted);
+      line-height: 1.55;
+    }
+
+    .step-connector {
+      width: 2px;
+      height: 16px;
+      background: linear-gradient(var(--coral), var(--amber));
+      margin-left: 15px;
+      opacity: 0.3;
+      border-radius: 2px;
+    }
+
+    /* ── Data table ── */
+    .data-table { width: 100%; border-collapse: collapse; }
+
+    .data-table th {
+      text-align: left;
+      font-size: 11px;
+      font-weight: 600;
+      text-transform: uppercase;
+      letter-spacing: 0.06em;
+      color: var(--muted);
+      padding: 0 12px 12px;
+    }
+
+    .data-table td {
+      padding: 12px;
+      font-size: 13px;
+      color: var(--mid);
+      border-top: 1px solid var(--border);
+      vertical-align: top;
+      line-height: 1.5;
+    }
+
+    .data-table tr:first-child td { border-top: none; }
+
+    .data-table td:first-child {
+      font-weight: 500;
+      color: var(--dark);
+      width: 40%;
+    }
+
+    .badge {
+      display: inline-flex;
+      align-items: center;
+      gap: 5px;
+      font-size: 11px;
+      font-weight: 600;
+      padding: 3px 9px;
+      border-radius: 20px;
+      white-space: nowrap;
+    }
+
+    .badge.deleted  { background: #FFECEC; color: var(--red); }
+    .badge.retained { background: #FFF8E8; color: #C88A00; }
+    .badge.anonymised { background: #E8F8FF; color: #0077AA; }
+
+    .badge::before { content: ''; width: 6px; height: 6px; border-radius: 50%; background: currentColor; }
+
+    /* ── Timeline ── */
+    .timeline { display: flex; flex-direction: column; gap: 0; }
+
+    .tl-item {
+      display: flex;
+      gap: 16px;
+      position: relative;
+    }
+
+    .tl-item:not(:last-child)::after {
+      content: '';
+      position: absolute;
+      left: 15px;
+      top: 32px;
+      bottom: -8px;
+      width: 2px;
+      background: var(--border);
+    }
+
+    .tl-dot {
+      width: 32px; height: 32px;
+      border-radius: 50%;
+      border: 2px solid var(--border);
+      background: white;
+      display: flex; align-items: center; justify-content: center;
+      font-size: 13px;
+      flex-shrink: 0;
+      z-index: 1;
+    }
+
+    .tl-content {
+      padding-bottom: 24px;
+      flex: 1;
+    }
+
+    .tl-content strong {
+      display: block;
+      font-size: 14px;
+      font-weight: 600;
+      color: var(--dark);
+      margin-bottom: 3px;
+    }
+
+    .tl-content p {
+      font-size: 13px;
+      color: var(--muted);
+      line-height: 1.55;
+    }
+
+    .tl-label {
+      display: inline-block;
+      font-size: 10px;
+      font-weight: 700;
+      text-transform: uppercase;
+      letter-spacing: 0.07em;
+      color: var(--coral);
+      background: #FFF0EC;
+      padding: 2px 8px;
+      border-radius: 10px;
+      margin-bottom: 6px;
+    }
+
+    /* ── Alert ── */
+    .alert {
+      border-radius: 14px;
+      padding: 16px 20px;
+      display: flex;
+      gap: 14px;
+      align-items: flex-start;
+      margin-top: 20px;
+    }
+
+    .alert.info   { background: #EDF6FF; border: 1.5px solid #B8DCFF; }
+    .alert.warn   { background: #FFF8EC; border: 1.5px solid #FFE0A0; }
+
+    .alert-icon { font-size: 20px; flex-shrink: 0; margin-top: 1px; }
+
+    .alert p {
+      font-size: 13px;
+      color: var(--mid);
+      line-height: 1.6;
+    }
+
+    .alert strong { color: var(--dark); }
+
+    /* ── Contact ── */
+    .contact-box {
+      text-align: center;
+      background: linear-gradient(135deg, rgba(255,137,112,0.08), rgba(255,198,109,0.08), rgba(135,200,232,0.08));
+      border: 1.5px solid var(--border);
+      border-radius: 20px;
+      padding: 36px 24px;
+      margin-top: 28px;
+    }
+
+    .contact-box h2 {
+      font-family: 'DM Serif Display', serif;
+      font-size: 24px;
+      color: var(--dark);
+      margin-bottom: 10px;
+    }
+
+    .contact-box p {
+      font-size: 14px;
+      color: var(--muted);
+      margin-bottom: 24px;
+      line-height: 1.6;
+    }
+
+    .email-link {
+      display: inline-flex;
+      align-items: center;
+      gap: 10px;
+      background: linear-gradient(135deg, var(--coral), var(--amber));
+      color: white;
+      text-decoration: none;
+      padding: 14px 28px;
+      border-radius: 40px;
+      font-size: 15px;
+      font-weight: 600;
+      box-shadow: 0 8px 24px rgba(255,137,112,0.35);
+      transition: transform 0.2s, box-shadow 0.2s;
+    }
+
+    .email-link:hover {
+      transform: translateY(-2px);
+      box-shadow: 0 12px 32px rgba(255,137,112,0.45);
+    }
+
+    /* ── Footer ── */
+    footer {
+      text-align: center;
+      padding: 32px 20px;
+      font-size: 12px;
+      color: var(--muted);
+      border-top: 1px solid var(--border);
+    }
+
+    footer a { color: var(--muted); text-decoration: underline; }
+
+    @media (max-width: 480px) {
+      .card { padding: 22px 18px; }
+      .hero  { padding: 48px 20px 64px; }
+    }
+  </style>
+</head>
+<body>
+
+<!-- ── Hero ── -->
+<div class="hero">
+  <div class="hero-inner">
+    <div class="logo">
+      <div class="logo-icon">🎓</div>
+      <span class="logo-text">Gyanavia</span>
+    </div>
+    <h1>Account &amp; Data<br/><em>Deletion Request</em></h1>
+    <p>We respect your right to control your data. This page explains exactly how to delete your Gyanavia account and what happens to your information.</p>
+  </div>
+</div>
+
+<div class="container">
+
+  <!-- ── How to delete ── -->
+  <div class="card">
+    <div class="card-header">
+      <div class="card-icon orange">📱</div>
+      <h2>How to Delete Your Account <span>Step-by-step in the app</span></h2>
+    </div>
+
+    <div class="steps">
+      <div class="step">
+        <div class="step-num">1</div>
+        <div class="step-body">
+          <strong>Open the Gyanavia app</strong>
+          <p>Sign in if you aren't already.</p>
+        </div>
+      </div>
+      <div class="step-connector"></div>
+      <div class="step">
+        <div class="step-num">2</div>
+        <div class="step-body">
+          <strong>Go to the Children screen</strong>
+          <p>Tap the menu icon (⋮) in the top-right corner of the Children list screen.</p>
+        </div>
+      </div>
+      <div class="step-connector"></div>
+      <div class="step">
+        <div class="step-num">3</div>
+        <div class="step-body">
+          <strong>Select "Delete Account"</strong>
+          <p>Choose <em>Delete Account</em> from the dropdown menu.</p>
+        </div>
+      </div>
+      <div class="step-connector"></div>
+      <div class="step">
+        <div class="step-num">4</div>
+        <div class="step-body">
+          <strong>Read the confirmation screen</strong>
+          <p>Review what will be deleted. Type <strong>DELETE</strong> in the confirmation field to proceed.</p>
+        </div>
+      </div>
+      <div class="step-connector"></div>
+      <div class="step">
+        <div class="step-num">5</div>
+        <div class="step-body">
+          <strong>Confirm deletion</strong>
+          <p>Tap <em>Delete My Account</em>. Your account is immediately deactivated and you are signed out.</p>
+        </div>
+      </div>
+    </div>
+
+    <div class="alert info" style="margin-top:24px">
+      <div class="alert-icon">ℹ️</div>
+      <p><strong>Can't access the app?</strong> Email us at <a href="mailto:privacy@gyanavia.com"><strong>privacy@gyanavia.com</strong></a> with your registered email address and we will process the deletion manually within 7 business days.</p>
+    </div>
+  </div>
+
+  <!-- ── What gets deleted ── -->
+  <div class="card">
+    <div class="card-header">
+      <div class="card-icon red">🗑️</div>
+      <h2>What Data Is Deleted <span>Immediately &amp; within 30 days</span></h2>
+    </div>
+
+    <table class="data-table">
+      <thead>
+        <tr>
+          <th>Data type</th>
+          <th>Action</th>
+          <th>Timing</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr>
+          <td>Name &amp; email address</td>
+          <td><span class="badge anonymised">Anonymised</span></td>
+          <td>Immediately</td>
+        </tr>
+        <tr>
+          <td>Google account link</td>
+          <td><span class="badge deleted">Deleted</span></td>
+          <td>Immediately</td>
+        </tr>
+        <tr>
+          <td>Mobile number</td>
+          <td><span class="badge deleted">Deleted</span></td>
+          <td>Immediately</td>
+        </tr>
+        <tr>
+          <td>Profile photo</td>
+          <td><span class="badge deleted">Deleted</span></td>
+          <td>Immediately</td>
+        </tr>
+        <tr>
+          <td>Child profiles</td>
+          <td><span class="badge deleted">Deleted</span></td>
+          <td>Immediately</td>
+        </tr>
+        <tr>
+          <td>Exam history &amp; results</td>
+          <td><span class="badge deleted">Deleted</span></td>
+          <td>Immediately</td>
+        </tr>
+        <tr>
+          <td>All login sessions / tokens</td>
+          <td><span class="badge deleted">Deleted</span></td>
+          <td>Immediately</td>
+        </tr>
+        <tr>
+          <td>Google Play subscription</td>
+          <td><span class="badge deleted">Cancelled</span></td>
+          <td>Immediately</td>
+        </tr>
+        <tr>
+          <td>Remaining account record</td>
+          <td><span class="badge deleted">Deleted</span></td>
+          <td>Within 30 days</td>
+        </tr>
+        <tr>
+          <td>Payment transaction records</td>
+          <td><span class="badge retained">Retained</span></td>
+          <td>7 years (legal requirement)</td>
+        </tr>
+        <tr>
+          <td>Anonymised activity logs</td>
+          <td><span class="badge retained">Retained</span></td>
+          <td>90 days (fraud &amp; abuse prevention)</td>
+        </tr>
+      </tbody>
+    </table>
+
+    <div class="alert warn" style="margin-top:20px">
+      <div class="alert-icon">⚠️</div>
+      <p><strong>Subscription refunds:</strong> Deleting your account cancels your Google Play subscription but does not automatically issue a refund for the current billing period. To request a refund, contact Google Play Support directly.</p>
+    </div>
+  </div>
+
+  <!-- ── Timeline ── -->
+  <div class="card">
+    <div class="card-header">
+      <div class="card-icon blue">⏱️</div>
+      <h2>Deletion Timeline <span>What happens when</span></h2>
+    </div>
+
+    <div class="timeline">
+      <div class="tl-item">
+        <div class="tl-dot">⚡</div>
+        <div class="tl-content">
+          <div class="tl-label">Instant</div>
+          <strong>Account deactivated</strong>
+          <p>Your personal information is anonymised, all active sessions are revoked, and your Google Play subscription is cancelled. You are signed out immediately.</p>
+        </div>
+      </div>
+      <div class="tl-item">
+        <div class="tl-dot">📅</div>
+        <div class="tl-content">
+          <div class="tl-label">Within 30 days</div>
+          <strong>Full record purged</strong>
+          <p>The remaining account record and all associated data are permanently deleted from our servers and backups. This satisfies Google Play's data deletion policy.</p>
+        </div>
+      </div>
+      <div class="tl-item">
+        <div class="tl-dot">🔒</div>
+        <div class="tl-content">
+          <div class="tl-label">Up to 7 years</div>
+          <strong>Payment records retained</strong>
+          <p>Anonymised payment transaction records are retained as required by Indian tax law (GST records). These cannot be linked back to your identity after deletion.</p>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- ── What is kept ── -->
+  <div class="card">
+    <div class="card-header">
+      <div class="card-icon purple">📋</div>
+      <h2>Data We Must Retain <span>Legal &amp; regulatory requirements</span></h2>
+    </div>
+    <p style="font-size:14px; color:var(--muted); line-height:1.7; margin-bottom:16px;">
+      Certain records must be retained by law even after account deletion. This data is fully anonymised — it cannot be used to identify you — and is kept only for the following purposes:
+    </p>
+    <div class="steps" style="gap:12px">
+      <div class="step">
+        <div class="step-num" style="background:linear-gradient(135deg,#8B5CF6,#A78BFA)">₹</div>
+        <div class="step-body">
+          <strong>Payment &amp; tax records — 7 years</strong>
+          <p>Required under the Indian GST Act and IT Act. Records contain only anonymised transaction amounts and dates.</p>
+        </div>
+      </div>
+      <div class="step">
+        <div class="step-num" style="background:linear-gradient(135deg,#87C8E8,#6FA8DC)">🛡️</div>
+        <div class="step-body">
+          <strong>Anonymised activity logs — 90 days</strong>
+          <p>Used solely for fraud detection, abuse prevention, and service security. No personal identifiers are retained.</p>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- ── Contact ── -->
+  <div class="contact-box">
+    <h2>Need Help?</h2>
+    <p>If you cannot access the app or have questions about your data,<br/>our privacy team will respond within 7 business days.</p>
+    <a href="mailto:privacy@gyanavia.com" class="email-link">
+      ✉️ &nbsp; privacy@gyanavia.com
+    </a>
+    <p style="margin-top:20px; font-size:12px; color:var(--muted)">
+      You can also write to us at:<br/>
+      <strong style="color:var(--mid)">Gyanavia, India</strong>
+    </p>
+  </div>
+
+</div>
+
+<footer>
+  <p>© 2026 Gyanavia · <a href="#">Privacy Policy</a> · <a href="#">Terms of Service</a></p>
+  <p style="margin-top:6px">This page is provided in compliance with Google Play's User Data Policy.</p>
+</footer>
+
+</body>
+</html>
